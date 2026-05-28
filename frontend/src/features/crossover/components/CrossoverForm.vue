@@ -7,8 +7,9 @@
 
     <div class="space-y-4">
       <div>
-        <label class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">{{ t('symbol') }}</label>
+        <label for="symbol-select" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">{{ t('symbol') }}</label>
         <select 
+          id="symbol-select"
           :value="modelValue.symbol"
           @change="updateField('symbol', ($event.target as HTMLSelectElement).value)"
           class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-lg px-3 py-2.5 text-[var(--text-main)] focus:outline-none focus:border-blue-500"
@@ -20,8 +21,9 @@
       </div>
 
       <div>
-        <label class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">{{ t('interval') }}</label>
+        <label for="interval-select" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">{{ t('interval') }}</label>
         <select 
+          id="interval-select"
           :value="modelValue.interval"
           @change="updateField('interval', ($event.target as HTMLSelectElement).value)"
           class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-lg px-3 py-2.5 text-[var(--text-main)] focus:outline-none focus:border-blue-500"
@@ -45,8 +47,9 @@
 
       <div class="grid grid-cols-2 gap-4">
         <div>
-          <label class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">{{ t('shortPeriod') }}</label>
+          <label for="short-period-input" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">{{ t('shortPeriod') }}</label>
           <input 
+            id="short-period-input"
             type="number" 
             :value="modelValue.short_period"
             @input="updateField('short_period', parseInt(($event.target as HTMLInputElement).value) || 0)"
@@ -54,8 +57,9 @@
           />
         </div>
         <div>
-          <label class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">{{ t('longPeriod') }}</label>
+          <label for="long-period-input" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">{{ t('longPeriod') }}</label>
           <input 
+            id="long-period-input"
             type="number" 
             :value="modelValue.long_period"
             @input="updateField('long_period', parseInt(($event.target as HTMLInputElement).value) || 0)"
@@ -65,8 +69,9 @@
       </div>
 
       <div>
-        <label class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">{{ t('fromDate') }}</label>
+        <label for="from-date-input" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">{{ t('fromDate') }}</label>
         <input 
+          id="from-date-input"
           type="datetime-local" 
           :value="modelValue.from"
           @input="updateField('from', ($event.target as HTMLInputElement).value)"
@@ -75,14 +80,16 @@
       </div>
 
       <div>
-        <label class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">{{ t('toDate') }}</label>
+        <label for="to-date-input" class="block text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">{{ t('toDate') }}</label>
         <input 
+          id="to-date-input"
           type="datetime-local" 
           :value="modelValue.to"
           @input="updateField('to', ($event.target as HTMLInputElement).value)"
           class="w-full bg-[var(--input-bg)] border border-[var(--input-border)] rounded-lg px-3 py-2 text-[var(--text-main)] text-sm focus:outline-none focus:border-blue-500" 
         />
       </div>
+
 
       <button @click="$emit('calculate')" :disabled="loading" class="custom-button w-full mt-6 cursor-pointer">
         <span v-if="loading" class="flex items-center justify-center gap-2">

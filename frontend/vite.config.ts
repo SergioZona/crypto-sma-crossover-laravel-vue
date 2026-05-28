@@ -9,6 +9,8 @@ export default defineConfig({
     vue(),
     tailwindcss()
   ],
+  cacheDir: '/tmp/vite-cache',
+
 
   resolve: {
     alias: {
