@@ -1,0 +1,24 @@
+// ============================================================
+// SCSS Variables — globally available via vite.config.ts
+// additionalData injection. Import with @use in component
+// <style lang="scss"> blocks, or rely on the global injection.
+// ============================================================
+
+// Background palette
+$bg-primary:   #080b10;
+$bg-panel:     rgba(13, 17, 24, 0.85);
+$border-glass: rgba(255, 255, 255, 0.08);
+
+// Accent colors (curated HSL palette)
+$accent-blue:   #38bdf8;
+$accent-purple: #a855f7;
+$accent-green:  #22c55e;
+$accent-red:    #ef4444;
+
+// Typography
+$text-main:      #f3f4f6;
+$text-secondary: #9ca3af;
+
+// Spacing scale
+$radius-panel: 20px;
+$radius-btn:   12px;

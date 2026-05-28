@@ -1,0 +1,45 @@
+*.log
+.DS_Store
+.env
+.env.*
+.phpactor.json
+.phpunit.result.cache
+.editorconfig
+.eslintrc.jsss
+/.codex
+/.cursor/
+/.idea
+/.nova
+/.phpunit.cache
+/.vscode
+/.zed
+
+# Laravel specific ignores
+backend/vendor/
+backend/.env
+backend/bootstrap/cache/
+backend/storage/framework/
+backend/storage/logs/
+backend/storage/*.key
+backend/public/storage
+backend/public/hot
+backend/public/build
+backend/.phpunit.result.cache
+
+# Frontend specific ignores
+frontend/node_modules/
+frontend/dist/
+frontend/.pnpm-store/
+frontend/.env
+frontend/.env.*
+
+_ide_helper.php
+Homestead.json
+Homestead.yaml
+Thumbs.db
+
+# PR & Technical test ignores
+[pP][rR].md
+docs/[pP]rueba*.pdf
+docs/*[tT]eest*.md
+

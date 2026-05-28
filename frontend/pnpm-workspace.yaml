@@ -1,0 +1,6 @@
+packages: []
+
+# Approved by: pnpm approve-builds @parcel/watcher --yes
+# Required for Vite's file watching to work (native Node.js addon).
+allowBuilds:
+  '@parcel/watcher': true

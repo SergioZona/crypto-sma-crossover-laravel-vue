@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+
+jobs:
+  laravel-tests:
+    name: "Laravel Tests (PHPUnit)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create required folders
+        run: |
+          mkdir -p backend/bootstrap/cache
+          mkdir -p backend/storage/framework/{sessions,views,cache}
+          mkdir -p backend/storage/logs
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+          coverage: none
+
+      - name: Install Dependencies
+        run: |
+          cd backend
+          composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Execute Tests
+        run: |
+          cd backend
+          php artisan test
+
+  vue-build:
+    name: "Vue build and lint check"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          pnpm install
+
+      - name: Build frontend
+        run: |
+          cd frontend
+          pnpm run build
+
+  sonar:
+    name: "SonarQube Analysis"
+    needs: [laravel-tests, vue-build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: SonarSource/sonarqube-scan-action@fd88b7d7ccbaefd23d8f36f73b59db7a3d246602 # v6.0.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}

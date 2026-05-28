@@ -1,0 +1,118 @@
+@use "variables" as *;
+
+// ============================================================
+// CSS Theme Variables
+// ============================================================
+:root {
+  --bg-primary: #080b10;
+  --bg-panel: rgba(13, 17, 24, 0.85);
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --text-main: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --bg-table-header: #1f2937;
+  --bg-table-row-hover: #111827;
+  --glass-shadow: rgba(0, 0, 0, 0.5);
+  --input-bg: #0d1118;
+  --input-border: #374151;
+  --text-white-fixed: #ffffff;
+}
+
+.light-theme {
+  --bg-primary: #f3f4f6;
+  --bg-panel: rgba(255, 255, 255, 0.85);
+  --border-glass: rgba(0, 0, 0, 0.08);
+  --text-main: #1f2937;
+  --text-secondary: #4b5563;
+  --bg-table-header: #e5e7eb;
+  --bg-table-row-hover: #f9fafb;
+  --glass-shadow: rgba(0, 0, 0, 0.05);
+  --input-bg: #ffffff;
+  --input-border: #d1d5db;
+  --text-white-fixed: #1f2937;
+}
+
+// ============================================================
+// Global Scaffolding
+// ============================================================
+#app {
+  font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html, body {
+  margin: 0;
+  background-color: var(--bg-primary) !important;
+  color: var(--text-main) !important;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// ============================================================
+// Glassmorphism System
+// ============================================================
+.glass-panel {
+  background: var(--bg-panel);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-glass);
+  border-radius: $radius-panel;
+  box-shadow: 0 12px 40px 0 var(--glass-shadow);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 16px 48px 0 rgba(56, 189, 248, 0.15);
+  }
+}
+
+// ============================================================
+// Accent Typography
+// ============================================================
+.gradient-title {
+  background: linear-gradient(135deg, $accent-blue, $accent-purple);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+// ============================================================
+// Interactive Premium Buttons
+// ============================================================
+.custom-button {
+  background: linear-gradient(135deg, #16a34a, $accent-green);
+  border: none;
+  color: white;
+  padding: 14px 28px;
+  border-radius: $radius-btn;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.025em;
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.3);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(34, 197, 94, 0.5);
+    filter: brightness(1.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+}

@@ -1,0 +1,20 @@
+FROM php:8.4-cli
+
+# Install Postgres PDO and Redis extension (Debian-based)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        libpq-dev \
+    && docker-php-ext-install pdo pdo_pgsql \
+    && pecl install redis \
+    && docker-php-ext-enable redis \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Give workdir ownership to the built-in non-root 'www-data' user (uid=33)
+# docker:S6471 — resolved: all runtime processes run as 'www-data', not root
+RUN mkdir -p /var/www/html && chown www-data:www-data /var/www/html
+WORKDIR /var/www/html
+
+# Switch to non-root user for runtime
+USER www-data
+
+# Command to run Laravel
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
