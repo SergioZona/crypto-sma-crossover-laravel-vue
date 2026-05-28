@@ -6,7 +6,7 @@ A modern, high-performance monorepo application implementing standard **Laravel 
 
 ## 🎬 Live Demo
 
-https://github.com/SergioZona/crypto-sma-crossover-laravel-vue/raw/main/docs/FRONTEND_DEMO.mp4
+<video src="docs/FRONTEND_DEMO.mp4" width="100%" controls></video>
 
 > **Note:** The video above shows the SPA in action — entering credentials, selecting a symbol/interval/date range and SMA periods, loading the candlestick chart with SMA overlays, and inspecting detected crossover points.
 
