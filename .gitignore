@@ -25,6 +25,8 @@ backend/public/storage
 backend/public/hot
 backend/public/build
 backend/.phpunit.result.cache
+backend/coverage.xml
+
 
 # Frontend specific ignores
 frontend/node_modules/
