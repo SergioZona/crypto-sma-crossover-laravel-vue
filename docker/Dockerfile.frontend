@@ -7,26 +7,26 @@ RUN corepack enable pnpm
 WORKDIR /var/www/html
 RUN chown -R node:node /var/www/html
 
-# Switch to non-root node user
-USER node
+# Copy package descriptors first to leverage Docker layer caching (read-only for node)
+COPY package.json pnpm-lock.yaml .npmrc pnpm-workspace.yaml ./
 
-# Copy package descriptors first to leverage Docker layer caching
-# .npmrc includes only-built-dependencies=@parcel/watcher (no workspace file needed)
-COPY --chown=node:node package.json pnpm-lock.yaml .npmrc pnpm-workspace.yaml ./
+# Switch to non-root node user for package installation
+USER node
 
 # Install dependencies using pnpm
 RUN pnpm install --frozen-lockfile
 
-# Copy complete source code
-COPY --chown=node:node . .
+# Switch to root to copy source files safely with read-only permissions for node
+USER root
+COPY src ./src
+COPY public ./public
+COPY tsconfig.json vite.config.ts index.html ./
+
+# Switch back to non-root node user for safe container execution
+USER node
 
 # Expose port for development hot-reloading
 EXPOSE 5173
 
-# Switch back to root to allow runtime volume chown before dropping privileges
-USER root
-
 # Start the Vite development hot-reloading dev-server
 CMD ["pnpm", "run", "dev"]
-
-

@@ -58,6 +58,7 @@ services:
       context: ../frontend
       dockerfile: ../docker/Dockerfile.frontend
     container_name: crossover_frontend
+    user: root
     volumes:
       - ../frontend:/var/www/html
       - /var/www/html/node_modules
