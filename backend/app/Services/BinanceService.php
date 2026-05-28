@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Models\Candle;
+use App\Exceptions\BinanceApiException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 
@@ -29,8 +30,9 @@ class BinanceService
             ]);
 
             if ($response->failed()) {
-                throw new \RuntimeException("Failed to fetch klines from Binance: " . $response->body());
+                throw new BinanceApiException("Failed to fetch klines from Binance: " . $response->body());
             }
+
 
             $klines = $response->json();
             $candles = [];

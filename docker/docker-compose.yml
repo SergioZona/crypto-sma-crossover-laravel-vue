@@ -58,6 +58,7 @@ services:
       context: ../frontend
       dockerfile: ../docker/Dockerfile.frontend
     container_name: crossover_frontend
+    user: root
     volumes:
       - ../frontend:/var/www/html
       - /var/www/html/node_modules
@@ -66,8 +67,10 @@ services:
       CI: "true"
     ports:
       - "5173:5173"
+    command: sh -c "chown -R node:node /var/www/html/node_modules && su node -c 'pnpm run dev'"
     depends_on:
       - backend
+
 
 volumes:
   postgres_data:

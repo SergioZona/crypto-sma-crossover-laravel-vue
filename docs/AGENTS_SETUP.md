@@ -26,7 +26,7 @@ Our AI development pipeline relies on four major AI toolsets installed in this e
 ### 4. RTK (Real-Time Knowledge)
 **Purpose**: Immediate domain grounding.  
 **Repository**: [rtk-ai/rtk](https://github.com/rtk-ai/rtk)  
-**What it does**: Provides persistent rules and dynamic retrieval constraints so the AI inherently understands Hexagonal Architecture constraints and domain specifics without needing to be repeatedly prompted.
+**What it does**: Provides persistent rules and dynamic retrieval constraints so the AI inherently understands standard Laravel 11 directory structure, Vue 3 Composition API conventions, and domain-based architecture specifics without needing to be repeatedly prompted.
 
 ---
 

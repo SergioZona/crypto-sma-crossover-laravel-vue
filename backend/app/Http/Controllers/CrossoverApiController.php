@@ -51,22 +51,25 @@ class CrossoverApiController extends Controller
 
         $validator = $this->buildValidator($request);
         if ($validator->fails()) {
-            return response()->json([
+            $response = response()->json([
                 'status' => 'fail',
                 'data'   => $validator->errors()->toArray(),
             ], 400);
+        } else {
+            try {
+                $response = $this->runCalculation($request);
+            } catch (\Exception $e) {
+                $response = response()->json([
+                    'status'  => 'error',
+                    'message' => $e->getMessage(),
+                    'code'    => 500,
+                ], 500);
+            }
         }
 
-        try {
-            return $this->runCalculation($request);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status'  => 'error',
-                'message' => $e->getMessage(),
-                'code'    => 500,
-            ], 500);
-        }
+        return $response;
     }
+
 
     public function history(Request $request): JsonResponse
     {
