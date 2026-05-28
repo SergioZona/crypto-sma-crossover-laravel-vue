@@ -101,11 +101,12 @@ sequenceDiagram
 
 ## Getting Started Locally
 
-### 1. Build and Start the Docker Containers
-Move to the `docker/` folder and boot up PostgreSQL, Redis, the Laravel backend, and the Vue frontend in the background:
+### 1. Configure Environment and Start Containers
+Move to the `docker/` folder, copy the environment template, and boot up PostgreSQL, Redis, the Laravel backend, and the Vue frontend in the background:
 ```bash
 cd docker
-docker compose up -d
+cp .env.example .env
+docker compose up -d --build
 ```
 
 ### 2. Execute Migrations
